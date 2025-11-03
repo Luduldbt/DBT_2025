@@ -11,7 +11,7 @@
 
 with source_data as (
 
-    select 1 as id,'Ronu' as Name
+    select 1 as id,'Ronu' as Name /* This is an example */
     union all
     select null as id,'Ajay' as Name
 
