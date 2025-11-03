@@ -3,4 +3,4 @@
         materialized='view'
     )
 }}
-select current_timestamp() as ct
+select current_timestamp() as ct /**/
