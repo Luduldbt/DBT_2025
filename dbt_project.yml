@@ -44,11 +44,5 @@ models:
       
 
 
-seeds:
-  my_new_project:
-    GS_PROJECT:
-      +database: FINANCIAL_DATA_HUB
-      +schema: RAW
-
 
 
