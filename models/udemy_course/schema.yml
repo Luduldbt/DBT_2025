@@ -35,6 +35,7 @@ sources:
            tests:
             - not_null
 
+
 models:
   - name: Trip_Fact
     description: "Fact table of all bike trips"
@@ -71,7 +72,7 @@ models:
         tests:
           - not_null
           
-      
+     
   - name: station_dimension
     description: "Station dimension table"
     columns:
@@ -118,6 +119,7 @@ models:
           - relationships:
               field: start_date
               to: ref('daily_weather')
+              
       - name: start_station_id
         tests:
           - not_null
