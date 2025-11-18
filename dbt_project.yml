@@ -35,12 +35,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  +database: "DBT_CONNECTION_UDEMY"
-  +schema: "COURSE_SCHEMA"
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
+  +database: "{{ target.database }}"
+  +schema: "{{ target.schema }}"
+  udemy_course:
+    BIKE-WEATHER:
       +materialized: table
+
+
       
 
 
