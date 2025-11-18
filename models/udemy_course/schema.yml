@@ -1,0 +1,128 @@
+
+sources:
+  - name: BIKE_DATA
+    database: CITY_BIKES
+    schema: CITY_BIKES_SCHEMA
+    tables:
+      - name: BIKE_TABLE
+        columns:
+          - name: FILE_NAME
+            description: "Details"
+            tests:
+              - not_null
+  - name: BIKE_DATA2
+    database: CITY_BIKES
+    schema: CITY_BIKES_SCHEMA
+    tables:
+      - name: BIKE_TABLE2
+        columns:
+          - name: FILE_NAME
+            description: "File Details"
+            tests:
+              - not_null
+          
+
+
+             
+  - name: WEATHER_DATA
+    database: DEMO
+    schema: DEMO_SCHEMA
+    tables:
+      - name: WEATHERTABLE_B
+        columns:
+         - name: FILE_NAME
+           description: "Details of File"
+           tests:
+            - not_null
+
+
+models:
+  - name: Trip_Fact
+    description: "Fact table of all bike trips"
+    columns:
+      - name: ride_id
+        tests:
+         - not_null
+      - name: trip_date
+        tests:
+         - not_null
+      - name: ride_duration_in_seconds
+        tests:
+          - not_null
+      - name: start_station_id
+        tests:
+          - not_null
+      - name: end_station_id
+        tests:
+          - not_null
+
+      - name: member_casual
+        tests:
+          - accepted_values:
+              values: ['Subscriber','Customer']
+
+  - name: daily_weather
+    description: "Daily aggregated weather data"
+    columns:
+      - name: start_date
+        tests: 
+          - not_null
+          - unique
+      - name: weather
+        tests:
+          - not_null
+          
+     
+  - name: station_dimension
+    description: "Station dimension table"
+    columns:
+      - name: station_id
+        tests:
+          - not_null
+          - unique
+      - name: station_name
+        tests:
+          - not_null
+      - name: station_latitude
+        tests:
+          - not_null
+      - name: station_longitude
+        tests:
+          - not_null
+
+
+  - name: date_dimension
+    description: "Date dimension table"
+    columns:
+      - name: started_at
+        tests:
+          - not_null
+      - name: date_started_at
+        tests:
+          - not_null
+      - name: hour_started_at
+        tests:
+          - not_null
+      - name: month_started_at
+        tests:
+          - not_null
+  
+  - name: weather_bike_corelation
+    description: "Joined model of trips + weather"
+    columns:
+      - name: ride_id
+        tests:
+          - not_null
+      - name: trip_date
+        tests:
+          - not_null
+          - relationships:
+              field: start_date
+              to: ref('daily_weather')
+              
+      - name: start_station_id
+        tests:
+          - not_null
+      - name: end_station_id
+        tests:
+          - not_null
